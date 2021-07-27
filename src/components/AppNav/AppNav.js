@@ -6,13 +6,17 @@ import navItems from '../../config/Sections.json';
 class AppNav extends Component {
   render() {
     return (
-      <Navbar color="light">
-        {navItems.map((navItem) =>
-          <Link to={`/sections/${navItem.value}`} >
-            { navItem.label }
-          </Link>
-        )}
-      </Navbar>
+      <div>
+        <Navbar color="light">
+          {navItems.map((navItem) =>
+            <Link to={`/sections/${navItem.value}`} >
+              { navItem.label }
+            </Link>
+          )}
+          <Link to={`/add-article`} >Add an Article</Link>
+          <Link to={`/login`} >Login</Link>
+        </Navbar>
+      </div>
     )
   }
 }
