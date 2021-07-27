@@ -25,9 +25,35 @@ const searchArticles = async (textToSearchFor) => {
   return data;
 }
 
+const addArticle = async (articleObject) => {
+  try {
+    let response = await fetch(BASE_URL, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(articleObject)
+    })
+    let data = await response.json();
+  
+    if (data.error) {
+      return {'message': "You done goofed. Try again."}
+    }
+    else {
+      return {"message": "You good, carry on."}
+    }
+  }
+  
+  catch (e) {
+    console.error(e)
+  }
+
+}
+
 export {
   fetchArticleByID,
   fetchArticles,
   fetchArticlesBySection,
   searchArticles,
+  addArticle,
 };
