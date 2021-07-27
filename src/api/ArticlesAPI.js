@@ -53,7 +53,7 @@ const addArticle = async (articleObject) => {
     let data = await response.json();
     if (data.error) {
       return {
-        'message': "there was an error saving article.",
+        'message': "there was an error saving the article.",
         'isError': true,
         'statusCode':200
       }

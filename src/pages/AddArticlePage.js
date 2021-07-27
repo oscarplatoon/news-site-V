@@ -4,6 +4,7 @@ import ArticlesAPI from "../api/ArticlesAPI"
 
 const AddArticlePage = () => {
 
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [submissionSuccess, setSubmissionSuccess] = useState(false)
   const [subMessage, setSubMessage] = useState('')
 
@@ -14,12 +15,15 @@ const AddArticlePage = () => {
       'byline':evt.target.byline.value,
       'abstract':evt.target.abstract.value
     }
+    setIsSubmitted(true)
     ArticlesAPI.addArticle(articleObject)
     .then((json) => {
       if(json.isError == false) {
         setSubmissionSuccess(true)
         setSubMessage(json.message)
-        console.log(subMessage)
+      } else if(json.isError == true) {
+        setSubMessage(json.message)
+
       }
       console.log(json.isError)
     })
@@ -28,9 +32,10 @@ const AddArticlePage = () => {
 
   return(
     <div>
-      { submissionSuccess ?
+      { isSubmitted && submissionSuccess?
         <h4 className='bg-success text-dark'> {subMessage}</h4>
-        : <h4 className='bg-secondary text-light'> Please fill out the form: </h4>
+        : !isSubmitted ? <h4 className='bg-secondary text-light'> Please fill out the form: </h4>
+        : <h4 className='bg-danger text-warning'>{subMessage}</h4>
       }
       <Form onSubmit={handleForm}>
         <FormGroup>
@@ -51,7 +56,7 @@ const AddArticlePage = () => {
           </Label>
           <Input required type='textarea' name='abstract' placeholder='Article Abstract Goes Here' />
         </FormGroup>
-        <Button type='submit'>Submit Article</Button>
+        <Button color='success' type='submit'>Submit Article</Button>
       </Form>
     </div>
   )
