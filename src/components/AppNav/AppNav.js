@@ -1,6 +1,7 @@
+
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav } from 'reactstrap';
+import { Link, NavLink } from 'react-router-dom';
+import { Button, Navbar, Nav, NavItem } from 'reactstrap';
 import navItems from '../../config/Sections.json';
 import SearchBar from '../SearchBar/SearchBar';
 
@@ -20,9 +21,15 @@ const AppNav = (props) => {
             </Link>
         )}
       </Nav>
-      <Nav>
         < SearchBar handleFilterText={props.handleFilterText}/>
-      </Nav>
+      < NavLink to = '/add-article' >
+        <Button action bg='info' className='btn-outline-danger'>
+            Add Article
+        </Button>
+      </NavLink>
+      <NavLink to='/login'>
+        Login
+      </NavLink>
     </Navbar>
   )
 }

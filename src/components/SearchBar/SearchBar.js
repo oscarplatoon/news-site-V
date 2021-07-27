@@ -3,7 +3,6 @@ import {Button, Form, FormGroup, Input, InputGroup, InputGroupAddon } from 'reac
 
 const SearchBar = (props) => {
 
-
   const handleSearch = (evt) => {
     evt.preventDefault()
     console.log(evt.target.input.value)
@@ -11,12 +10,13 @@ const SearchBar = (props) => {
   }
 
   return (
-    <Form onSubmit={handleSearch}>
+    <Form className='form-inline' onSubmit={handleSearch}>
       <FormGroup>
         <InputGroup>
-          <InputGroupAddon addonType='prepend' type='submit'><Button>Search</Button></InputGroupAddon>
-          <Input name='input' onChange={(e) => {setInputValue(e.target.value)}}
-          type="text" placeholder="Filter Articles" />
+          <InputGroupAddon addonType='prepend' type='submit'>
+            <Button color='secondary'>Search</Button>
+          </InputGroupAddon>
+          <Input name='input' type="text" placeholder="Filter Articles" />
         </InputGroup>
       </FormGroup>
     </Form>
