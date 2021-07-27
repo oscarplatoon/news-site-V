@@ -1,34 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar } from 'reactstrap';
+import { Navbar, Nav } from 'reactstrap';
 import navItems from '../../config/Sections.json';
+import SearchBar from '../SearchBar/SearchBar';
 
-class AppNav extends Component {
-  render() {
-    return (
-      <Navbar color="light">
-        {navItems.map((navItem) =>
-          <Link to={`/sections/${navItem.value}`} >
-            { navItem.label }
-          </Link>
+
+const AppNav = (props) => {
+  
+  return (
+    <Navbar color="light">
+      <Nav >
+        <Link to='/'>| Home |</Link>
+      </Nav>
+      <Nav>
+        {
+          navItems.map((navItem, index) =>
+            <Link to={`/sections/${navItem.label.toLowerCase()}`} key={index}>
+              | { navItem.label } |
+            </Link>
         )}
-      </Navbar>
-    )
-  }
+      </Nav>
+      <Nav>
+        < SearchBar handleFilterText={props.handleFilterText}/>
+      </Nav>
+    </Navbar>
+  )
 }
 
 export default AppNav;
-
-
-// Functional solution:
-// function AppNav() {
-//   return (
-//     <Navbar color="light">
-//       {navItems.map((navItem) =>
-//         <Link to={`/sections/${navItem.value}`} >
-//           {navItem.label}
-//         </Link>
-//       )}
-//     </Navbar>
-//   );
-// }

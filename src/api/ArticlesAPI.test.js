@@ -42,3 +42,24 @@ it('calls ArticlesAPI.fetchArticlesBySection(\'opinion\')', (done) => {
       throw new Error('Call failed')
     })
 })
+
+it('submits an article by calling addArticle()', (done) => {
+  const request = fetchMock.post('http://localhost:3001/api/articles', {
+    success: true
+  });
+  const articleObject = {
+    title: 'test',
+    byline: 'title',
+    abstract: 'adsf'
+  };
+  return addArticle(articleObject)
+    .then((json) => {
+      const requestBody = request._calls[0][1].body;
+      expect(JSON.parse(requestBody)).toEqual(articleObject);
+      expect(json.ok).toEqual(true);
+      done();
+    })
+    .catch((err) => {
+      throw new Error('Call failed');
+    });
+});
