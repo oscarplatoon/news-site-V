@@ -22,13 +22,15 @@ const AppNav = (props) => {
         )}
       </Nav>
         < SearchBar handleFilterText={props.handleFilterText}/>
-      < NavLink to = '/add-article' >
-        <Button action bg='info' className='btn-outline-danger'>
+      <NavLink to='/add-article' >
+        <Button color='danger' className=''>
             Add Article
         </Button>
       </NavLink>
       <NavLink to='/login'>
-        Login
+        <Button color='success' classname='text-info btn-success'>
+          Login
+        </Button>
       </NavLink>
     </Navbar>
   )
